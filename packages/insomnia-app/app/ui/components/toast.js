@@ -129,6 +129,7 @@ class Toast extends React.PureComponent<Props, State> {
         disableUpdateNotification: settings.disableUpdateNotification,
         updateChannel: settings.updateChannel,
         deviceId: await getDeviceId(),
+        executedRequests: stats.executedRequests,
       };
 
       notification = await fetch.post('/notification', data, session.getCurrentSessionId());

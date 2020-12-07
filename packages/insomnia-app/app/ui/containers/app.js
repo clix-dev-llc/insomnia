@@ -99,6 +99,7 @@ import { NUNJUCKS_TEMPLATE_GLOBAL_PROPERTY_NAME } from '../../templating/index';
 import { isGrpcRequest, isGrpcRequestId } from '../../models/helpers/is-model';
 import * as requestOperations from '../../models/helpers/request-operations';
 import { GrpcProvider } from '../context/grpc';
+import { trackExecutedRequest } from '../../common/analytics';
 
 @autobind
 class App extends PureComponent {
@@ -650,6 +651,9 @@ class App extends PureComponent {
       return;
     }
 
+    // Update request stats
+    trackExecutedRequest();
+
     // NOTE: Since request is by far the most popular event, we will throttle
     // it so that we only track it if the request has changed since the last one
     const key = request._id;
@@ -737,6 +741,9 @@ class App extends PureComponent {
     if (!request) {
       return;
     }
+
+    // Update request stats
+    trackExecutedRequest();
 
     // NOTE: Since request is by far the most popular event, we will throttle
     // it so that we only track it if the request has changed since the last noe

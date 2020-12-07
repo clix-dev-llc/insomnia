@@ -14,6 +14,7 @@ type BaseStats = {
   currentVersion: string | null,
   lastVersion: string | null,
   launches: number,
+  executedRequests: number,
 };
 
 export type Stats = BaseModel & BaseStats;
@@ -25,6 +26,7 @@ export function init(): BaseStats {
     currentVersion: null,
     lastVersion: null,
     launches: 0,
+    executedRequests: 0,
   };
 }
 
