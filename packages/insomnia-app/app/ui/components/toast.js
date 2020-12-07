@@ -109,6 +109,8 @@ class Toast extends React.PureComponent<Props, State> {
 
     const stats = await models.stats.get();
     const settings = await models.settings.getOrCreate();
+    const requests =
+      (await db.count(models.request.type)) + (await db.count(models.grpcRequest.type));
 
     let notification: ToastNotification;
 
@@ -120,7 +122,7 @@ class Toast extends React.PureComponent<Props, State> {
         platform: getAppPlatform(),
         app: getAppId(),
         version: getAppVersion(),
-        requests: await db.count(models.request.type),
+        requests: requests,
         requestGroups: await db.count(models.requestGroup.type),
         environments: await db.count(models.environment.type),
         workspaces: await db.count(models.workspace.type),
